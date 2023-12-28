@@ -1,0 +1,137 @@
+package system;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import java.sql.*;
+
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Image;
+
+public class LoginPage {
+
+	private JFrame frmWsp;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
+	private JLabel msgLabel;
+//	private JLabel iconLabel;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LoginPage window = new LoginPage();
+					window.frmWsp.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public LoginPage() {
+		initialize();
+	}
+	
+	Connection con;
+	PreparedStatement query;
+	
+	
+	
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmWsp = new JFrame();
+		frmWsp.setTitle("Wsp");
+		frmWsp.setBounds(100, 100, 680, 402);
+		frmWsp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmWsp.getContentPane().setLayout(null);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(0, 0, 255));
+		btnLogin.setFocusable(false);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					
+					Class.forName("org.postgresql.Driver");
+					con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Wsp_Database", "postgres", "Stebster");
+					String sql = "SELECT password FROM users WHERE username = (?)";
+					query = con.prepareStatement(sql);
+					query.setString(1, usernameField.getText().toLowerCase());
+					ResultSet result = query.executeQuery();
+					if(result.next()) {
+						if(String.valueOf(passwordField.getPassword()) == result.getString("password")){
+							msgLabel.setText("Login succesful");
+						}
+						else {
+							msgLabel.setText("Invalid password");
+						}
+						}	
+					else {
+							msgLabel.setText("Invalid username");
+						}
+				
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnLogin.setBounds(288, 295, 89, 23);
+		frmWsp.getContentPane().add(btnLogin);
+		
+		JLabel usernameLabel = new JLabel("Username");
+		usernameLabel.setBounds(163, 97, 82, 14);
+		frmWsp.getContentPane().add(usernameLabel);
+		
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setBounds(163, 147, 65, 14);
+		frmWsp.getContentPane().add(passwordLabel);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(255, 94, 189, 20);
+		frmWsp.getContentPane().add(usernameField);
+		usernameField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(255, 144, 189, 20);
+		frmWsp.getContentPane().add(passwordField);
+		
+		msgLabel = new JLabel("");
+		msgLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		msgLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		msgLabel.setBounds(149, 31, 367, 31);
+		frmWsp.getContentPane().add(msgLabel);
+		
+//		iconLabel = new JLabel("");
+//		Image kbtuIcon = new ImageIcon(this.getClass().getResource("/icons/KBTU_logo.png")).getImage();
+//		iconLabel.setIcon(new ImageIcon(kbtuIcon));
+//		iconLabel.setBounds(456, 154, 200, 200);
+//		frmWsp.getContentPane().add(iconLabel);
+//		frmWsp.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnLogin, usernameLabel, passwordLabel, usernameField, passwordField, welcomeLabel, iconLabel}));
+	}
+}

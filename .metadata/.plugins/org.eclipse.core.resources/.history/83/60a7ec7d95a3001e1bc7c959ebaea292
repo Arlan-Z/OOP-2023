@@ -1,0 +1,82 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.awt.event.ActionEvent;
+
+public class DeleteUser {
+
+	private JFrame frmDeleteUser;
+	private JTextField UsernameField;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					DeleteUser window = new DeleteUser();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public DeleteUser() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmDeleteUser = new JFrame();
+		frmDeleteUser.setTitle("Delete User");
+		frmDeleteUser.setBounds(100, 100, 384, 243);
+		frmDeleteUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDeleteUser.getContentPane().setLayout(null);
+		frmDeleteUser.setVisible(true);
+		
+		
+		
+		JLabel UsernameLabel = new JLabel("Username");
+		UsernameLabel.setBounds(107, 53, 71, 14);
+		frmDeleteUser.getContentPane().add(UsernameLabel);
+		
+		UsernameField = new JTextField();
+		UsernameField.setBounds(171, 50, 96, 20);
+		frmDeleteUser.getContentPane().add(UsernameField);
+		UsernameField.setColumns(10);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("org.postgresql.Driver");
+					Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Wsp_Database", "postgres", "Stebster");
+					String sql = "INSERT INTO users VALUES (?, ?, ?)";
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnDelete.setBounds(140, 119, 89, 23);
+		frmDeleteUser.getContentPane().add(btnDelete);
+	}
+
+}

@@ -1,0 +1,80 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import system.User;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+
+public class Admin extends User{
+
+	private JFrame adminFrame;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Admin window = new Admin();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Admin(String username) {
+		super(username);
+		logIn();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		adminFrame = new JFrame();
+		adminFrame.setTitle("Admin");
+		adminFrame.setBounds(100, 100, 634, 479);
+		adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		adminFrame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Hello, " + username);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 11, 142, 14);
+		adminFrame.getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Add user");
+		btnNewButton.setBounds(10, 62, 124, 42);
+		adminFrame.getContentPane().add(btnNewButton);
+		
+		JButton btnUpdateUser = new JButton("Update user");
+		btnUpdateUser.setBounds(248, 62, 124, 42);
+		adminFrame.getContentPane().add(btnUpdateUser);
+		
+		JButton btnDeleteUser = new JButton("Delete user");
+		btnDeleteUser.setBounds(486, 62, 124, 42);
+		adminFrame.getContentPane().add(btnDeleteUser);
+	}
+
+	@Override
+	public void logIn() {
+		initialize();
+		
+	}
+	
+	protected void addUser()
+	{
+		
+	}
+}

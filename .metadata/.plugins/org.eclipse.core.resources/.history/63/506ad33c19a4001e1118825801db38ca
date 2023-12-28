@@ -1,0 +1,62 @@
+package dean;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+import system.User;
+import javax.swing.JLabel;
+import java.awt.Font;
+
+public class Dean extends User{
+
+	private JFrame frmDean;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Dean window = new Dean();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Dean(String username, String name, String surname) {
+		super(username, name, surname);
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
+	 */
+	private void initialize() {
+		frmDean = new JFrame();
+		frmDean.setTitle("Dean");
+		frmDean.setBounds(100, 100, 700, 497);
+		frmDean.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDean.getContentPane().setLayout(null);
+		
+		JLabel welcomeLabel = new JLabel("Welcome, " + surname + " " + name);
+		welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		welcomeLabel.setBounds(0, 11, 353, 48);
+		frmDean.getContentPane().add(welcomeLabel);
+	}
+
+	@Override
+	public void logIn() {
+		initialize();
+		
+	}
+
+}

@@ -1,0 +1,66 @@
+package teacher;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Complaint {
+
+	private JFrame frmComplain;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Complaint window = new Complaint();
+					window.frmComplain.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Complaint() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmComplain = new JFrame();
+		frmComplain.setTitle("Complain");
+		frmComplain.setBounds(100, 100, 536, 365);
+		frmComplain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmComplain.getContentPane().setLayout(null);
+		
+		JLabel nameLabel = new JLabel("Student name");
+		nameLabel.setBounds(10, 56, 140, 14);
+		frmComplain.getContentPane().add(nameLabel);
+		
+		JLabel surnameLabel = new JLabel("Student surname");
+		surnameLabel.setBounds(10, 81, 140, 14);
+		frmComplain.getContentPane().add(surnameLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(127, 53, 140, 20);
+		frmComplain.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(127, 78, 140, 20);
+		frmComplain.getContentPane().add(textField_1);
+	}
+}

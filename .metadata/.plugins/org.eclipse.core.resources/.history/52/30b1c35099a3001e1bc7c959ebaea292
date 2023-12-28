@@ -1,0 +1,105 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.awt.event.ActionEvent;
+
+public class UpdateUser {
+
+	private JFrame frmUpdateUser;
+	private JTextField usernameField;
+	private JTextField passwordField;
+	private JLabel StatusLabel;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UpdateUser window = new UpdateUser();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public UpdateUser() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmUpdateUser = new JFrame();
+		frmUpdateUser.setTitle("Update User");
+		frmUpdateUser.setBounds(100, 100, 713, 155);
+		frmUpdateUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUpdateUser.getContentPane().setLayout(null);
+		frmUpdateUser.setVisible(true);
+		
+		JLabel UsernameLabel = new JLabel("Username");
+		UsernameLabel.setBounds(42, 28, 74, 14);
+		frmUpdateUser.getContentPane().add(UsernameLabel);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(105, 25, 116, 20);
+		frmUpdateUser.getContentPane().add(usernameField);
+		usernameField.setColumns(10);
+		
+		JLabel PasswordLabel = new JLabel("New password");
+		PasswordLabel.setBounds(248, 29, 93, 14);
+		frmUpdateUser.getContentPane().add(PasswordLabel);
+		
+		passwordField = new JTextField();
+		passwordField.setBounds(331, 26, 116, 20);
+		frmUpdateUser.getContentPane().add(passwordField);
+		passwordField.setColumns(10);
+		
+		JButton btnChange = new JButton("Change");
+		btnChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("org.postgresql.Driver");
+					Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Wsp_Database", "postgres", "Stebster");
+					String sql = "DELETE FROM users WHERE username = (?)";
+					PreparedStatement query = con.prepareStatement(sql);
+					query.setString(1, usernameField.getText());
+					query.executeUpdate();
+					
+					statusLabel.setText("Deleting was successful");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					statusLabel.setText("Deleting failed");
+				}
+			}
+		});
+		btnChange.setBounds(517, 25, 89, 23);
+		frmUpdateUser.getContentPane().add(btnChange);
+		
+		StatusLabel = new JLabel("STATUS");
+		StatusLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		StatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		StatusLabel.setBounds(185, 72, 328, 14);
+		frmUpdateUser.getContentPane().add(StatusLabel);
+	}
+
+}

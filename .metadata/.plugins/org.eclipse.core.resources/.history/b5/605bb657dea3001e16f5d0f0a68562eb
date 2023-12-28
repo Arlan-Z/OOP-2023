@@ -1,0 +1,22 @@
+package system;
+
+public abstract class User {
+	public String username;
+	public String name;
+	public String surname;
+	
+	public User(String username, String name, String surname)
+	{
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+<<<<<<< HEAD
+		logIn();
+=======
+>>>>>>> edf57e130566025f95fac8ecf54328c43f0fccc7
+	}
+	
+	public User() {};
+	
+	public abstract void logIn();
+}

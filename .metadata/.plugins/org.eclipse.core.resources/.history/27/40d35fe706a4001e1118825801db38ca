@@ -1,0 +1,72 @@
+package student;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class StudentAddDrop {
+
+    JFrame frame;
+    private List<String> availableCourses; 
+    private List<String> enrolledCourses;
+
+    public StudentAddDrop() {
+        availableCourses = new ArrayList<>();
+        enrolledCourses = new ArrayList<>();
+
+        // Добавление начальных курсов
+        availableCourses.add("OOP");
+        availableCourses.add("Calculus I");
+        availableCourses.add("Calculus II");
+        availableCourses.add("Linear Algebra");
+        availableCourses.add("ADS");
+
+        initialize();
+    } 
+
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+
+        JComboBox<String> comboBoxCourses = new JComboBox<>();
+        for (String course : availableCourses) {
+            comboBoxCourses.addItem(course);
+        }
+        comboBoxCourses.setBounds(10, 10, 160, 20);
+        frame.getContentPane().add(comboBoxCourses);
+
+        JButton btnEnroll = new JButton("Add");
+        btnEnroll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedCourse = (String) comboBoxCourses.getSelectedItem();
+                if (!enrolledCourses.contains(selectedCourse)) {
+                    enrolledCourses.add(selectedCourse);
+                    StudentSchedule.addCourse(selectedCourse); // Добавление курса в расписание
+                }
+            }
+        });
+        btnEnroll.setBounds(180, 10, 89, 23);
+        frame.getContentPane().add(btnEnroll);
+
+        JButton btnDrop = new JButton("Drop");
+        btnDrop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedCourse = (String) comboBoxCourses.getSelectedItem();
+                if (enrolledCourses.contains(selectedCourse)) {
+                    enrolledCourses.remove(selectedCourse);
+                    StudentSchedule.removeCourse(selectedCourse); // Удаление курса из расписания
+                }
+            } 
+        });
+        btnDrop.setBounds(280, 10, 89, 23);
+        frame.getContentPane().add(btnDrop);
+    }
+
+    public void setVisible(boolean visible) {
+        frame.setVisible(visible);
+    }
+}

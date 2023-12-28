@@ -1,0 +1,130 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import enums.UserType;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Random;
+import java.awt.event.ActionEvent;
+
+public class AddUser {
+
+	private JFrame frmAddUser;
+	private JTextField nameField;
+	private JTextField surnameField;
+	private JButton btnAddUser;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddUser window = new AddUser();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddUser() {
+		initialize();
+	}
+	
+	public String passwordGenerator()
+	{
+		String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+		String numbers = "0123456789";
+		String special = "!@#$%^&*()_+";
+		String combination = upperCase + lowerCase + numbers + special;
+		int len = 8;
+		char[] password = new char[len];
+		Random r = new Random();
+		for(int i = 0; i < len; i++)
+		{
+			password[i] = combination.charAt(r.nextInt(combination.length()));
+		}
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAddUser = new JFrame();
+		frmAddUser.setTitle("Add User");
+		frmAddUser.setBounds(100, 100, 592, 433);
+		frmAddUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddUser.getContentPane().setLayout(null);
+		frmAddUser.setVisible(true);
+		
+		JLabel nameLabel = new JLabel("Name");
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		nameLabel.setBounds(10, 98, 60, 14);
+		frmAddUser.getContentPane().add(nameLabel);
+		
+		nameField = new JTextField();
+		nameField.setHorizontalAlignment(SwingConstants.LEFT);
+		nameField.setBounds(52, 97, 119, 20);
+		frmAddUser.getContentPane().add(nameField);
+		nameField.setColumns(10);
+		
+		JLabel surnameLabel = new JLabel("Surname");
+		surnameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		surnameLabel.setBounds(193, 98, 60, 14);
+		frmAddUser.getContentPane().add(surnameLabel);
+		
+		surnameField = new JTextField();
+		surnameField.setHorizontalAlignment(SwingConstants.LEFT);
+		surnameField.setColumns(10);
+		surnameField.setBounds(254, 97, 119, 20);
+		frmAddUser.getContentPane().add(surnameField);
+		
+		JComboBox userType = new JComboBox(UserType.values());
+		userType.setBounds(411, 96, 133, 22);
+		frmAddUser.getContentPane().add(userType);
+		
+		btnAddUser = new JButton("Add user");
+		btnAddUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("org.postgresql.Driver");
+					Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Wsp_Database", "postgres", "Stebster");
+					String sql = "INSERT INTO Wsp_Database VALUES (?, ?, ?)";
+					PreparedStatement query = con.prepareStatement(sql);
+					query.setString(1, (nameField.getText().charAt(0) + surnameField.getText()));
+					query.setString(2, "123456");
+					query.setString(3, userType.getSelectedItem().toString());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAddUser.setFocusable(false);
+		btnAddUser.setForeground(new Color(255, 255, 255));
+		btnAddUser.setBackground(new Color(0, 0, 128));
+		btnAddUser.setBounds(254, 292, 89, 23);
+		frmAddUser.getContentPane().add(btnAddUser);
+	}
+}

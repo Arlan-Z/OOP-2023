@@ -1,0 +1,21 @@
+package system;
+
+import admin.Admin;
+
+public class UserManager {
+	UserManager(){};
+	
+	public static void login(String username, String name, String surname, String type)
+	{
+		switch(type)
+		{
+			case("admin"):
+				Admin admin = new Admin(username, name, surname);
+				break;
+				
+			default:
+				System.out.print("UserManager didn`t found any match classes");
+				break;
+		}
+	}
+}

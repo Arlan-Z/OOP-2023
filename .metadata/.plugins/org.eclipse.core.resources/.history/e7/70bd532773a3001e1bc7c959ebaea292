@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module KbtuWsp {
+	requires java.desktop;
+}

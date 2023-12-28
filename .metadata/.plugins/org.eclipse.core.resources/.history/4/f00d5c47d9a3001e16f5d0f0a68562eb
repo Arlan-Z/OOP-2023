@@ -1,0 +1,10 @@
+package system;
+
+public class UserManager {
+	UserManager(){};
+	
+	public static void login(String username, String name, String surname)
+	{
+		
+	}
+}

@@ -1,0 +1,82 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import enums.UserType;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+
+public class AddUser {
+
+	private JFrame frmAddUser;
+	private JTextField nameField;
+	private JTextField surnameField;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddUser window = new AddUser();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddUser() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAddUser = new JFrame();
+		frmAddUser.setTitle("Add User");
+		frmAddUser.setBounds(100, 100, 592, 433);
+		frmAddUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddUser.getContentPane().setLayout(null);
+		frmAddUser.setVisible(true);
+		
+		JLabel nameLabel = new JLabel("Name");
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		nameLabel.setBounds(10, 98, 60, 14);
+		frmAddUser.getContentPane().add(nameLabel);
+		
+		nameField = new JTextField();
+		nameField.setHorizontalAlignment(SwingConstants.LEFT);
+		nameField.setBounds(84, 97, 119, 20);
+		frmAddUser.getContentPane().add(nameField);
+		nameField.setColumns(10);
+		
+		JLabel surnameLabel = new JLabel("Surname");
+		surnameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		surnameLabel.setBounds(238, 98, 60, 14);
+		frmAddUser.getContentPane().add(surnameLabel);
+		
+		surnameField = new JTextField();
+		surnameField.setHorizontalAlignment(SwingConstants.LEFT);
+		surnameField.setColumns(10);
+		surnameField.setBounds(312, 97, 119, 20);
+		frmAddUser.getContentPane().add(surnameField);
+		
+		JComboBox comboBox = new JComboBox(UserType.values());
+		comboBox.setBounds(467, 96, 89, 22);
+		frmAddUser.getContentPane().add(comboBox);
+	}
+}

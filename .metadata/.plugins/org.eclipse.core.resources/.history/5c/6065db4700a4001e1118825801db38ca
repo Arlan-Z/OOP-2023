@@ -1,0 +1,128 @@
+package student;
+
+import java.awt.EventQueue;
+
+import system.User;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Student extends User{
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Student window = new Student();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Student(String username, String name, String surname) {
+		super(username, name, surname);
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 800, 450);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		
+		JButton btnNewButton = new JButton("News");
+		btnNewButton.setBounds(56, 130, 150, 50);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("View Courses ");
+		btnNewButton_1.setBounds(342, 254, 150, 50);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("View Attestation");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				studentAtt();
+			}
+		});
+		btnNewButton_2.setBounds(56, 254, 150, 50);
+		frame.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Student Organization");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				studentOrganization();
+			} 
+		});
+		btnNewButton_3.setBounds(342, 192, 150, 50);
+		frame.getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("View Transcript");
+		btnNewButton_4.setBounds(342, 130, 150, 50);
+		frame.getContentPane().add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("ADD/DROP");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addDrop();
+			}
+		});
+		btnNewButton_5.setBounds(607, 130, 150, 50);
+		frame.getContentPane().add(btnNewButton_5);
+		
+		JButton btnNewButton_6 = new JButton("Questionnaire");
+		btnNewButton_6.setBounds(607, 192, 150, 50);
+		frame.getContentPane().add(btnNewButton_6);
+		
+		JButton btnNewButton_7 = new JButton("View Schedule");
+		btnNewButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				schedule();
+			}
+		});
+		btnNewButton_7.setBounds(56, 192, 150, 50);
+		frame.getContentPane().add(btnNewButton_7);
+	}
+
+	@Override
+	public void logIn() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void studentOrganization() {
+		StudentOrganization studentOrganization = new StudentOrganization();
+		studentOrganization.setVisible(true);
+	} 
+	
+	public void addDrop() {
+		StudentAddDrop addDrop = new StudentAddDrop();
+		addDrop.setVisible(true);
+	}
+	
+	public void schedule() {
+		StudentSchedule schedule = new StudentSchedule();
+		schedule.setVisible(true);
+	}
+	
+	public void studentAtt() {
+		StudentAttestation studentAtt = new StudentAttestation();
+		studentAtt.setVisible(true);
+	}
+}

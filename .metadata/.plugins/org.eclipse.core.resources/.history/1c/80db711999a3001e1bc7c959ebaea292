@@ -1,0 +1,81 @@
+package admin;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+
+public class UpdateUser {
+
+	private JFrame frmUpdateUser;
+	private JTextField usernameField;
+	private JTextField passwordField;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UpdateUser window = new UpdateUser();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public UpdateUser() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmUpdateUser = new JFrame();
+		frmUpdateUser.setTitle("Update User");
+		frmUpdateUser.setBounds(100, 100, 713, 155);
+		frmUpdateUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUpdateUser.getContentPane().setLayout(null);
+		frmUpdateUser.setVisible(true);
+		
+		JLabel UsernameLabel = new JLabel("Username");
+		UsernameLabel.setBounds(42, 28, 74, 14);
+		frmUpdateUser.getContentPane().add(UsernameLabel);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(105, 25, 116, 20);
+		frmUpdateUser.getContentPane().add(usernameField);
+		usernameField.setColumns(10);
+		
+		JLabel PasswordLabel = new JLabel("New password");
+		PasswordLabel.setBounds(248, 29, 93, 14);
+		frmUpdateUser.getContentPane().add(PasswordLabel);
+		
+		passwordField = new JTextField();
+		passwordField.setBounds(331, 26, 116, 20);
+		frmUpdateUser.getContentPane().add(passwordField);
+		passwordField.setColumns(10);
+		
+		JButton btnChange = new JButton("Change");
+		btnChange.setBounds(517, 25, 89, 23);
+		frmUpdateUser.getContentPane().add(btnChange);
+		
+		JLabel StatusLabel = new JLabel("STATUS");
+		StatusLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		StatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		StatusLabel.setBounds(185, 72, 328, 14);
+		frmUpdateUser.getContentPane().add(StatusLabel);
+	}
+
+}

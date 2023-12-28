@@ -1,0 +1,54 @@
+package teacher;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Complaint {
+
+	private JFrame frmComplain;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Complaint window = new Complaint();
+					window.frmComplain.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Complaint() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmComplain = new JFrame();
+		frmComplain.setTitle("Complain");
+		frmComplain.setBounds(100, 100, 536, 365);
+		frmComplain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmComplain.getContentPane().setLayout(null);
+		
+		JLabel NameLabel = new JLabel("New label");
+		NameLabel.setBounds(10, 56, 140, 14);
+		frmComplain.getContentPane().add(NameLabel);
+		
+		JLabel surnameLabel = new JLabel("New label");
+		surnameLabel.setBounds(10, 81, 140, 14);
+		frmComplain.getContentPane().add(surnameLabel);
+	}
+
+}

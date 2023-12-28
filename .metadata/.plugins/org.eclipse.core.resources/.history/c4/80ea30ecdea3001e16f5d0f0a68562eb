@@ -1,0 +1,7 @@
+package system;
+
+public abstract class Employee extends User{
+	public abstract void sendMessage();
+	public abstract void getMessage();
+	
+}

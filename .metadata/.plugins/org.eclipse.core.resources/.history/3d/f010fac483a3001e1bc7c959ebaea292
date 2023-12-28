@@ -1,0 +1,12 @@
+package system;
+
+public abstract class User {
+	public String username;
+	
+	public User(String username)
+	{
+		this.username = username;
+	}
+	
+	public abstract void logIn();
+}
